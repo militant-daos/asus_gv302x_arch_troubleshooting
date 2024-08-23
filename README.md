@@ -9,6 +9,17 @@ Disclaimer: I have dual boot with Windows 11 (vendor pre-installed). Previously 
 - In case the installed system does not boot check whether the kernel parameters string is correct. At the moment of writing rEFInd passed an incorrect path to the root partition. To fix that boot from the live USB stick image, do `arch-chroot` to the root (in case of a single=partition layout) or `/boot`, locate `refind_linux.conf`, replace wrong path for each boot menu item with the following `rw root=/dev/XYZ` where `XYZ` - the root partition.
 - Install `sudo` package.
 - Add your user to `wheel` group.
+- `sudo systemctl enable iwd`
+- Set-up networking using `iwctl` & `ip`.
+- Add the following config: `/etc/systemd/network/25-wireless.network`
+  ```
+  [Match]
+  Name=wlan0
+
+  [Network]
+  DHCP=yes
+  IgnoreCarrierLoss=3s
+  ```
 - Generate locales and set up timesync:
   ```
   sudo vim /etc/locale.gen
