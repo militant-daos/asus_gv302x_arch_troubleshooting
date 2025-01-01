@@ -43,6 +43,7 @@ Disclaimer: I have dual boot with Windows 11 (vendor pre-installed). Previously 
     EndSection
     ```
   - When installing NVidia proprietary driver DO NOT allow it rewriting the current X11 config! X11 won't start with it.
+  - Add the following to the kernel command line to prevent boot issues and pink flickering when using iGPU: `modprobe.blacklist=nouveau i915.enable_dc=0`
   - Edit `/etc/X11/Xwrapper.config` and add the following line: `allowed_users = anybody`.
   - Install `asusctl` and `supergfxctl` using this guide: `https://asus-linux.org/guides/arch-guide/`.
   - Fix GPG keys fetching issues:
@@ -82,6 +83,6 @@ Developer tools installation
   - Pull & install Microsoft marketplace AUR via `makepkg`: `https://aur.archlinux.org/packages/code-marketplace`. See `https://wiki.archlinux.org/title/Makepkg#` for details.
 - nRF Connect Extension
   - Install `nRF Connect Extension Pack` in VSCode.
-  - Fis missing shared objects (relevant for Aug 2024): `sudo ln -s /usr/lib/libunistring.so.5 /usr/lib/libunistring.so.2` and `sudo ln -s /usr/lib/libcrypt.so.2 /usr/lib/libcrypt.so.1`
+  - Fix missing shared objects (relevant for Aug 2024): `sudo ln -s /usr/lib/libunistring.so.5 /usr/lib/libunistring.so.2` and `sudo ln -s /usr/lib/libcrypt.so.2 /usr/lib/libcrypt.so.1`
   - Install toolchain, CLI tools & SDK.
   - nrfjprog & mergehex should be symlink-ed to /usr/local/bin. Shared objects should be there as well. JLink binaries should reside in /opt/SEGGER/JLink.
